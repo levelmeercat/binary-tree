@@ -1,0 +1,58 @@
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def pre_order(node):
+    if node:
+        print(node.value)
+        pre_order(node.left)
+        pre_order(node.right)
+
+
+tree = TreeNode(1000)
+tree.left = TreeNode(999)
+tree.right = TreeNode(1100)
+tree.left.left = TreeNode(900)
+tree.left.left.right = TreeNode(950)
+tree.right.right = TreeNode(1150)
+tree.right.right.left = TreeNode(1125)
+
+
+a = int(input())
+n = tree
+while True:
+    if a < n.value:
+        c = 'left'
+    else:
+        c = 'right'
+    if c == 'left':
+        if n.left.value == a:
+            break
+        else:
+            n = n.left
+    else:
+        if n.right.value == a:
+            break
+        else:
+            n = n.right
+if c == 'left':
+    if n.left.left != None or n.left.right != None:
+        if n.left.left != None:
+            n.left = n.left.left
+        else:
+            n.left = n.left.right
+    else:
+        n.left = None
+else:
+    if n.right.left != None or n.right.right != None:
+        if n.right.left != None:
+            n.right = n.right.left
+        else:
+            n.right = n.right.right
+    else:
+        n.right = None
+
+
+pre_order(tree)
